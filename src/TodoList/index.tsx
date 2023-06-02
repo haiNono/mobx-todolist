@@ -28,7 +28,6 @@ function TodoList() {
       todoStore.delTodo(id);
     };
   };
-  console.log(toJS(todoStore.todos));
 
 	// useObserver钩子
   return useObserver(() => (

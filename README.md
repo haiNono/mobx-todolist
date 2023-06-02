@@ -1,6 +1,6 @@
 # mobx
 
-最新的mobx增加了使用hooks来使用仓库的方法
+最新的mobx已经到了6.9版本，mobx-react也到了7.6，增加了用hooks来使用仓库的方法
 
 
 仓库的引用采用了useContext的方式，三个分支分别描述了三种mobx的使用方式

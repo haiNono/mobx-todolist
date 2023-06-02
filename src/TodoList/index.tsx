@@ -1,14 +1,31 @@
 import React, { useContext, useState } from "react";
-import { Store } from "../App";
 import { Card, List, Button, Input } from "antd";
-import { useObserver } from "mobx-react-lite";
-import { toJS } from "mobx";
+import { useObserver,useLocalObservable } from "mobx-react-lite";
+import { Todo } from "../store";
 import "./index.css";
 
 function TodoList() {
-  const todoStore = useContext(Store);
+
+	// 局部状态
+  const todoStore = useLocalObservable(() => ({
+		todos: [
+			{ title: "吃饭", done: false, id: Math.random() },
+			{ title: "睡觉", done: false, id: Math.random() },
+			{ title: "打豆豆", done: true, id: Math.random() },
+		],
+		addTodo (todo: Todo) {
+			this.todos.push(todo);
+		},
+		delTodo (id: number) {
+			this.todos.forEach((item: Todo, index, arr) => {
+				if (item.id === id) {
+					arr.splice(index,1);
+				}
+			});
+		}
+	}));
+	const {todos} = todoStore
   const [title, setTitle] = useState<string>("");
-  const { todos } = todoStore;
 
   const handleChange = (e: any) => {
     setTitle(e.target.value);
@@ -28,7 +45,6 @@ function TodoList() {
       todoStore.delTodo(id);
     };
   };
-  console.log(toJS(todoStore.todos));
 
 	// useObserver钩子
   return useObserver(() => (

@@ -1,6 +1,6 @@
 import { makeAutoObservable } from "mobx";
 
-interface Todo {
+export interface Todo {
   done: boolean;
   title: string;
   id: number;
